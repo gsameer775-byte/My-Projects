@@ -1,0 +1,4 @@
+SKU,Name,Category,Fabric,Color,DesignPattern,HasBlouse(Y/N),CostPrice,SellingPrice,WholesalePrice,RackLocation,ReorderLevel,InitialStock
+BAN-001,Banarasi Silk Saree Red,Banarasi Silk,Silk,Red,Zari Border,Y,3500,5000,4200,Rack-1,5,10
+KAN-001,Kanjivaram Pure Silk Green,Kanjivaram,Silk,Green,Temple Border,Y,4000,6000,5000,Rack-2,3,8
+COT-001,Cotton Handloom Blue,Cotton,Cotton,Blue,Plain,N,800,1200,1000,Rack-3,10,20

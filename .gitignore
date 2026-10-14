@@ -1,0 +1,7 @@
+node_modules
+.env
+.vscode
+config/config.php
+config/db.php
+backups/*.sql
+assets/uploads/

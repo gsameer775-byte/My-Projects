@@ -1,0 +1,464 @@
+/* =========================================================================
+   Hikayat Banaras — Admin Theme
+   Palette: Banarasi silk brocade — deep maroon body, antique zari gold trim,
+   warm ivory ground. Signature motif: a woven "kinara" (zari border) strip
+   used sparingly on card tops, the sidebar edge and table headers.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+    /* ---- Core palette ---- */
+    --maroon-950: #200504;
+    --maroon-900: #2c0806;
+    --maroon-800: #3b0a0a;
+    --maroon-700: #571212;
+    --maroon-600: #711b1b;
+
+    --gold-600:  #9c7a1f;
+    --gold-500:  #c9a227;
+    --gold-400:  #dab949;
+    --gold-300:  #e6ce7c;
+    --gold-100:  #f0e6d2;
+
+    --ivory-100: #faf6ee;
+    --ivory-50:  #fbf8f2;
+    --paper:     #ffffff;
+
+    --ink-900:   #2a1a12;
+    --ink-600:   #5a4638;
+    --ink-400:   #8a7867;
+
+    --teal-700:  #0d4f49;
+    --teal-500:  #146b62;
+
+    --rust-700:  #8f2c14;
+    --rust-100:  #fbe9e2;
+    --amber-700: #7a5710;
+    --amber-100: #fbf1d6;
+    --emerald-700: #1c5c46;
+    --emerald-100: #e3f3ea;
+
+    /* ---- Motif ---- */
+    --kinara: repeating-linear-gradient(
+        90deg,
+        var(--gold-500) 0px, var(--gold-500) 6px,
+        var(--gold-300) 6px, var(--gold-300) 9px,
+        transparent 9px, transparent 14px
+    );
+
+    --shadow-sm: 0 1px 2px rgba(43, 10, 6, 0.06), 0 1px 3px rgba(43, 10, 6, 0.05);
+    --shadow-md: 0 4px 14px rgba(43, 10, 6, 0.09), 0 1px 3px rgba(43, 10, 6, 0.06);
+    --shadow-lg: 0 12px 32px rgba(43, 10, 6, 0.14);
+
+    --radius: 10px;
+    --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Manrope', Arial, sans-serif;
+    background: var(--ivory-100);
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(201, 162, 39, 0.06), transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(59, 10, 10, 0.04), transparent 40%);
+    background-attachment: fixed;
+    color: var(--ink-900);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: 'Fraunces', 'Georgia', serif;
+    color: var(--maroon-800);
+    letter-spacing: 0.2px;
+}
+
+h1 { font-size: 28px; font-weight: 600; margin-bottom: 20px; }
+h2 { font-size: 20px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; letter-spacing: 0.3px; }
+
+a { color: var(--teal-700); }
+a:hover { color: var(--maroon-800); }
+
+small { color: var(--ink-400); }
+
+::selection { background: var(--gold-300); color: var(--maroon-950); }
+
+/* Keyboard accessibility — visible focus ring everywhere */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--gold-500);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}
+
+/* ---- Custom scrollbar (sidebar + tables) ---- */
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--maroon-600); border-radius: 4px; }
+
+/* =========================================================================
+   Sidebar
+   ========================================================================= */
+.sidebar {
+    width: 232px;
+    background:
+        linear-gradient(180deg, var(--maroon-900) 0%, var(--maroon-950) 100%);
+    color: #fff;
+    min-height: 100vh;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+    border-right: 4px solid transparent;
+    border-image: var(--kinara) 4;
+    box-shadow: var(--shadow-lg);
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li a {
+    display: block;
+    padding: 12px 18px;
+    color: var(--gold-100);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border-left: 3px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease;
+}
+
+.sidebar li a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--gold-500);
+    padding-left: 22px;
+    color: #fff;
+}
+
+/* ---- Sidebar sub-menu (CRM etc.) ---- */
+.nav-sub-parent {
+    padding: 12px 18px 4px;
+    color: var(--gold-400);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nav-sub { list-style: none; margin-top: 2px; margin-bottom: 6px; }
+.nav-sub li a {
+    padding: 8px 18px 8px 30px;
+    font-size: 13px;
+    color: rgba(240, 230, 210, 0.75);
+    border-left: 3px solid transparent;
+    font-weight: 400;
+}
+.nav-sub li a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--gold-300);
+    border-left-color: var(--gold-500);
+    padding-left: 34px;
+}
+
+/* ---- Sidebar footer (user name + logout) ---- */
+.sidebar-footer {
+    border-top: 1px solid rgba(240, 230, 210, 0.18);
+    margin-top: 12px;
+    padding: 16px 18px 22px;
+}
+.sidebar-user {
+    color: var(--gold-300);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.sidebar-logout {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold-100);
+    border: 1px solid var(--rust-700);
+    padding: 6px 16px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.sidebar-logout:hover { background: var(--rust-700); color: #fff; }
+
+main { margin-left: 232px; padding: 28px 32px 48px; max-width: 1400px; }
+
+/* =========================================================================
+   Cards, Forms, Tables
+   ========================================================================= */
+.card {
+    background: var(--paper);
+    padding: 22px 24px;
+    border-radius: var(--radius);
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(59, 10, 10, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--kinara);
+}
+.card h2 { margin-bottom: 14px; font-size: 18px; color: var(--maroon-800); }
+.card h3 { margin-bottom: 14px; color: var(--maroon-800); }
+
+.alert {
+    padding: 13px 18px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+}
+.alert-error   { background: var(--rust-100);    color: var(--rust-700);    border-left-color: var(--rust-700); }
+.alert-success { background: var(--emerald-100); color: var(--emerald-700); border-left-color: var(--emerald-700); }
+
+.inline-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.inline-form input {
+    padding: 9px 12px;
+    border: 1px solid #e2d8c6;
+    border-radius: var(--radius-sm);
+    background: var(--ivory-50);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.form-grid label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink-600);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.form-grid input, .form-grid select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2d8c6;
+    border-radius: var(--radius-sm);
+    background: var(--ivory-50);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink-900);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.form-grid input:focus, .form-grid select:focus {
+    border-color: var(--gold-500);
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+    outline: none;
+}
+
+button, .btn-primary {
+    padding: 10px 20px;
+    background: linear-gradient(180deg, var(--maroon-700) 0%, var(--maroon-800) 100%);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    box-shadow: var(--shadow-sm);
+    transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+button:hover, .btn-primary:hover {
+    background: linear-gradient(180deg, var(--maroon-600) 0%, var(--maroon-700) 100%);
+    box-shadow: var(--shadow-md);
+}
+button:active, .btn-primary:active { transform: translateY(1px); }
+
+.toolbar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.data-table th, .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0e9dc;
+    text-align: left;
+}
+.data-table th {
+    background: var(--maroon-800);
+    color: var(--gold-100);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 3px solid var(--gold-500);
+}
+.data-table th:first-child { border-top-left-radius: var(--radius-sm); }
+.data-table th:last-child { border-top-right-radius: var(--radius-sm); }
+.data-table tbody tr:hover { background: var(--ivory-100); }
+.data-table tbody tr:nth-child(even) { background: rgba(240, 230, 210, 0.18); }
+.data-table tbody tr:nth-child(even):hover { background: var(--ivory-100); }
+
+.badge-warning {
+    background: var(--amber-100);
+    color: var(--amber-700);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-left: 6px;
+    letter-spacing: 0.2px;
+}
+
+/* ---- Pagination ---- */
+.pagination { margin-top: 18px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.pagination a, .pagination strong {
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+.pagination a { background: var(--ivory-100); color: var(--maroon-800); border: 1px solid #e9ddc4; }
+.pagination a:hover { background: var(--gold-100); border-color: var(--gold-400); }
+.pagination strong { background: var(--maroon-800); color: var(--gold-100); }
+
+/* =========================================================================
+   POS / Sales module
+   ========================================================================= */
+.pos-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 22px; align-items: start; }
+#sareeSearch {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e2d8c6;
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    background: var(--ivory-50);
+}
+#sareeSearch:focus { border-color: var(--gold-500); outline: none; box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18); }
+.saree-results { max-height: 300px; overflow-y: auto; border-radius: var(--radius-sm); }
+.saree-result-item { padding: 11px 12px; border-bottom: 1px solid #f0e9dc; cursor: pointer; transition: background 0.12s ease; }
+.saree-result-item:hover { background: var(--ivory-100); }
+.totals-box {
+    background: var(--ivory-100);
+    padding: 18px;
+    border-radius: var(--radius-sm);
+    margin-top: 14px;
+    border: 1px dashed var(--gold-400);
+}
+.totals-box p { margin-bottom: 6px; font-size: 14px; }
+#submitSaleBtn {
+    margin-top: 16px;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+}
+
+/* ---- Invoice print ---- */
+.invoice-box {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 32px;
+    border-radius: var(--radius);
+}
+.invoice-header { text-align: center; border-bottom: 2px solid var(--gold-500); padding-bottom: 16px; margin-bottom: 16px; }
+.invoice-header h1 { font-family: 'Fraunces', serif; }
+.invoice-meta p { margin-bottom: 5px; font-size: 14px; }
+.invoice-payment { margin-top: 18px; padding-top: 14px; border-top: 1px dashed #ddd0b0; }
+
+/* =========================================================================
+   Customer ID chip (click to copy)
+   ========================================================================= */
+.id-chip {
+    background: var(--gold-100);
+    color: var(--maroon-800);
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: all;
+    border: 1px solid var(--gold-400);
+}
+.id-chip:hover { background: var(--gold-300); }
+
+/* =========================================================================
+   Dashboard
+   ========================================================================= */
+.dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 22px; }
+.stat-card {
+    text-align: center;
+    border-top: 3px solid var(--gold-500);
+}
+.stat-card::before { display: none; } /* replace kinara strip with solid gold top on stat cards */
+.stat-label {
+    font-size: 12px;
+    color: var(--ink-400);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+}
+.stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--maroon-800);
+    margin-bottom: 4px;
+}
+.stat-sub { font-size: 12px; color: var(--ink-400); }
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 860px) {
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 4px solid transparent;
+        border-image: var(--kinara) 4;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .sidebar ul { display: flex; }
+    .sidebar li a { padding: 12px 14px; white-space: nowrap; border-left: none; border-bottom: 3px solid transparent; }
+    .sidebar li a:hover { padding-left: 14px; border-left: none; border-bottom-color: var(--gold-500); }
+    .nav-sub-parent, .nav-sub { display: none; }
+    .sidebar-footer { display: none; }
+    main { margin-left: 0; padding: 20px; }
+    .form-grid, .pos-grid, .dashboard-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- UPI QR on Invoice ---- */
+.upi-qr-box { text-align: center; margin-top: 16px; padding: 16px; border: 1px dashed #ccc; border-radius: 8px; }
+.upi-qr-box #upiQrCode { display: inline-block; margin: 8px 0; }
+
+/* ---- UPI QR on Invoice ---- */
+.upi-qr-box { text-align: center; margin-top: 16px; padding: 16px; border: 1px dashed #ccc; border-radius: 8px; }
+.upi-qr-box #upiQrCode { display: inline-block; margin: 8px 0; }

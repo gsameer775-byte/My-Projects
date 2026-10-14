@@ -1,0 +1,4 @@
+InvoiceNo,InvoiceDate,CustomerName,CustomerPhone,SKU,ProductName,Quantity,ExpectedReadyDate,Stages
+INV-1001,2026-09-05,Ramesh Gupta,9876543210,SLK-045,Banarasi Silk Saree,1,2026-09-08,Polish|Fall & Piko
+INV-1001,2026-09-05,Ramesh Gupta,9876543210,COT-012,Cotton Saree,2,2026-09-08,
+INV-1002,2026-09-05,Sunita Devi,9123456780,SLK-090,Katan Silk Saree,1,,Decor / Calendar (Press)|Dye

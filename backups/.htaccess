@@ -1,0 +1,5 @@
+# Block all direct web access to backup files - they contain full database
+# dumps (customer data, sales, everything). Downloads must go through
+# admin/settings/backups.php which checks login + permission first.
+Order Deny,Allow
+Deny from all
